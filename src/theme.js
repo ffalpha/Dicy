@@ -4,7 +4,7 @@ import { createTheme } from '@material-ui/core'
 export default createTheme({
     palette: {
         background: {
-            default: '#F1F3F4',
+            default: '#f0e813',
         },
         primary: {
             main: "#14194C",

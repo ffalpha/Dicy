@@ -1,7 +1,7 @@
 
 
 const Definition = () => {
-  return <div></div>;
+  return <div>Defination</div>;
 };
 
 export default Definition;
