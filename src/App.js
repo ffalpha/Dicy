@@ -31,7 +31,7 @@ const App = () => {
   return    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Grid container sx={{ p: 2, mt: { xs: 0, sm: 2 } }} justifyContent="center">
-        <Grid item xs={12} sm={8} md={5} lg={3} >
+        <Grid item xs={12} sm={8} md={6} lg={6} >
           <Router>
             <Route exact path="/">
               <Home />
