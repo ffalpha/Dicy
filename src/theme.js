@@ -4,12 +4,12 @@ import { createTheme } from '@material-ui/core'
 export default createTheme({
     palette: {
         background: {
-            default: '#f0e813',
+            default: '#ecf719',
         },
         primary: {
-            main: "#14194C",
+            main: "#000000",
         },
-        pink: 'linear-gradient(138.72deg, #DC8295 0%, #DC687C 95.83%)'
+        pink: 'red'
     },
     typography: {
         fontFamily: 'Mulish, sans-serif',

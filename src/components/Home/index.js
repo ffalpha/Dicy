@@ -22,14 +22,14 @@ const Home = () => {
                 sx={{
                     mt: 3,
                     mb: 1
-                }} variant="h4">Dictionary</Typography>
-            <Typography color="GrayText">Find meanings and save for quick reference</Typography>
+                }} variant="h4">Dicy</Typography>
+            <Typography color="primary">Find meanings and save for quick reference</Typography>
             <Box sx={{ width: '360px' }}>
                 <form onSubmit={handleSubmit}>
                     <FilledInput
                         value={word}
                         onChange={event => setWord(event.target.value)}
-                        disableUnderline placeholder="Search word"
+                        disableUnderline placeholder="Search for word"
                         sx={{
                             my: 4,
                             backgroundColor: 'white',

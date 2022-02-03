@@ -9,19 +9,24 @@ import Definition from './components/Definition'
 
 
 const App = () => {
-  return <ThemeProvider theme={theme}> 
+  return <ThemeProvider theme={theme}>
   <CssBaseline />
-  <Router>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/bookmarks">
-              <Bookmarks  />
-            </Route>
-            <Route path="/search/:word">
-              <Definition />
-            </Route>
-          </Router></ThemeProvider>;
+  <Grid container sx={{ p: 2, mt: { xs: 0, sm: 2 } }} justifyContent="center">
+    <Grid item xs={12} sm={8} md={6} lg={6} >
+      <Router>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/bookmarks">
+          <Bookmarks  />
+        </Route>
+        <Route path="/search/:word">
+          <Definition  />
+        </Route>
+      </Router>
+    </Grid>
+  </Grid>
+</ThemeProvider>
 };
 
 export default App;
