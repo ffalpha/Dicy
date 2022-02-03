@@ -11,42 +11,42 @@ const Definition = ({ bookmarks,
     removeBookmark }) => {
     const { word } = useParams();
     const history = useHistory();
-    // const [definitions, setDefinitions] = useState([])
-    // const [exist, setExist] = useState(true)
-    // const [audio, setAudio] = useState(null)
+    const [definitions, setDefinitions] = useState([])
+    const [exist, setExist] = useState(true)
+    const [audio, setAudio] = useState(null)
 
-    // const isBookmarked = Object.keys(bookmarks).includes(word)
+    const isBookmarked = Object.keys(bookmarks).includes(word)
 
-    // const updateState = data => {
-    //     setDefinitions(data)
-    //     const phonetics = data[0].phonetics
-    //     if (!phonetics.length) return;
-    //     const url = phonetics[0].audio.replace('//ssl', 'https://ssl');
-    //     setAudio(new Audio(url));
-    // }
+    const updateState = data => {
+        setDefinitions(data)
+        const phonetics = data[0].phonetics
+        if (!phonetics.length) return;
+        const url = phonetics[0].audio.replace('//ssl', 'https://ssl');
+        setAudio(new Audio(url));
+    }
 
-    // useEffect(() => {
-    //     const fetchDefinition = async () => {
-    //         try {
-    //             const resp = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-    //             updateState(resp.data)
-    //         } catch (err) {
-    //             setExist(false)
-    //         }
-    //     }
+    useEffect(() => {
+        const fetchDefinition = async () => {
+            try {
+                const resp = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                updateState(resp.data)
+            } catch (err) {
+                setExist(false)
+            }
+        }
 
-    //     if (!isBookmarked) fetchDefinition()
-    //     else updateState(bookmarks[word])
-    // }, [])
+        if (!isBookmarked) fetchDefinition()
+        else updateState(bookmarks[word])
+    }, [])
 
 
 
-    // if (!exist) return <AlignCenterBox>
-    //     <Typography>Word not found</Typography>
-    //     <Button variant="contained" sx={{ textTransform: 'capitalize', mt: 2 }} onClick={history.goBack}>Go back</Button>
-    // </AlignCenterBox>
+    if (!exist) return <AlignCenterBox>
+        <Typography>Word not found</Typography>
+        <Button variant="contained" sx={{ textTransform: 'capitalize', mt: 2 }} onClick={history.goBack}>Go back</Button>
+    </AlignCenterBox>
 
-    // if (!definitions.length) return <AlignCenterBox ><CircularProgress /></AlignCenterBox>
+    if (!definitions.length) return <AlignCenterBox ><CircularProgress /></AlignCenterBox>
 
     return (
         <>
@@ -54,8 +54,8 @@ const Definition = ({ bookmarks,
                 <IconButton onClick={history.goBack}>
                     <BackIcon sx={{ color: 'black' }} />
                 </IconButton>
-                <IconButton >
-                    <BookmarkedIcon sx={{ color: 'black' }} /> 
+                <IconButton onClick={() => isBookmarked ? removeBookmark(word) : addBookmark(word, definitions)}>
+                    {isBookmarked ? <BookmarkedIcon sx={{ color: 'black' }} /> : <BookmarkIcon sx={{ color: 'black' }} />}
                 </IconButton>
             </Stack>
             <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{
@@ -68,17 +68,15 @@ const Definition = ({ bookmarks,
                 borderRadius: 2,
             }} >
                 <Typography sx={{ textTransform: 'capitalize' }} variant="h5">{word}</Typography>
-               <IconButton 
-                // onClick={() => audio.play()} 
-                sx={{
+                {audio && <IconButton onClick={() => audio.play()} sx={{
                     borderRadius: 2,
                     p: 1,
                     color: '#fff',
                     background: theme => theme.palette.pink,
-                }} ><PlayIcon /></IconButton>
+                }} ><PlayIcon /></IconButton>}
             </Stack>
 
-            {/* {definitions.map((def, idx) =>
+            {definitions.map((def, idx) =>
                 <Fragment key={idx}>
                     <Divider sx={{ display: idx === 0 ? 'none' : 'block', my: 3 }} />
                     {def.meanings.map(meaning =>
@@ -94,7 +92,7 @@ const Definition = ({ bookmarks,
                         </Box>
                     )}
                 </Fragment>
-            )} */}
+            )}
         </>
     )
 }
